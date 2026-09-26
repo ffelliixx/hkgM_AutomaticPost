@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>圖片產生器</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="page-header">
+      <h1>圖片產生器</h1>
+      <p>填寫文字，在瀏覽器裡產生 1080×1350 的 PNG，不需要伺服器。</p>
+    </header>
+
+    <div class="layout">
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">內容</h2>
+        <form id="poster-form" autocomplete="off">
+          <div class="group">
+            <h3>文字</h3>
+            <div class="field">
+              <label for="subtitle">小標題 (27字) </label>
+              <input id="subtitle" name="subtitle" type="text" maxlength="40" placeholder="顯示在最上方">
+            </div>
+            <div class="field">
+              <label for="title">標題 (7字) </label>
+              <input id="title" name="title" type="text" maxlength="80" placeholder="較大的主標題">
+            </div>
+            <div class="field">
+              <label for="message1">內文 1 (10字) </label>
+              <textarea id="message1" name="message1" rows="3" maxlength="200" placeholder="標題下方的第一段"></textarea>
+            </div>
+            <div class="field">
+              <label for="message2">內文 2 (10字) </label>
+              <textarea id="message2" name="message2" rows="3" maxlength="200" placeholder="標題下方的第二段"></textarea>
+            </div>
+          </div>
+
+          <div class="group">
+            <h3>外觀</h3>
+            <div class="field">
+              <label for="background">底圖（可選）</label>
+              <input id="background" name="background" type="file" accept="image/*">
+              <p class="hint" id="file-hint">未上傳時使用預設 BG.png。圖片會等比例放大並置中裁切。</p>
+            </div>
+            <div class="field">
+              <label for="offset-y">垂直位置 <span id="offset-y-value">0</span></label>
+              <input id="offset-y" name="offset-y" type="range" min="-50" max="50" value="0">
+              <p class="hint">預設放在上方黑色區域並置中。小標題黑色、標題黃色、內文白色。</p>
+            </div>
+          </div>
+
+          <p id="form-error" class="error" role="alert"></p>
+          <div class="actions">
+            <button id="generate" type="submit" disabled>產生圖片</button>
+            <button id="reset-poster" type="button">重置</button>
+          </div>
+        </form>
+      </section>
+
+      <section id="preview" class="panel preview-panel" aria-labelledby="preview-title">
+        <h2 id="preview-title">預覽</h2>
+        <div id="canvas-host"></div>
+        <p id="status">正在載入字型與底圖…</p>
+        <button id="download" type="button" hidden>下載圖片</button>
+      </section>
+    </div>
+  </main>
+
+  <p class="font-loader" aria-hidden="true">載入字型</p>
+  <noscript>此頁面需要 JavaScript 才能產生圖片。</noscript>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.3/lib/p5.min.js" defer></script>
+  <script src="script.js" defer></script>
+</body>
+</html>
